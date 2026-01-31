@@ -1,0 +1,223 @@
+@import 'tailwindcss';
+
+/* ============================================
+   FIVE BROTHERS CRM — DESIGN SYSTEM TOKENS
+   "The family's memory — where no customer 
+   is forgotten and every follow-up feels personal."
+   ============================================ */
+
+:root {
+  /* === FOUNDATION (The Silence) === */
+  --color-morning-warmth: #FDFBF8;
+  --color-soft-linen: #F5F1EB;
+  --color-warm-paper: #EBE6DF;
+  
+  /* === PRIMARY (The Voice) === */
+  --color-brothers-navy: #1E3A5F;
+  --color-brothers-navy-light: #2D4A6F;
+  --color-brothers-navy-dark: #152C4A;
+  
+  /* === SECONDARY === */
+  --color-steady-slate: #6B7C8F;
+  --color-steady-slate-light: #8A98A8;
+  
+  /* === ACCENT (The Celebration) === */
+  --color-advocate-amber: #D4915E;
+  --color-advocate-amber-hover: #C4814E;
+  --color-advocate-amber-light: #F4DCC8;
+  
+  /* === FOLLOW-UP STAGES === */
+  --color-first-reach: #3B82A0;
+  --color-second-touch: #E6A23C;
+  --color-final-ask: #D4664A;
+  --color-moved-on: #8B95A1;
+  
+  /* === STATUS === */
+  --color-growth-green: #3D8B5E;
+  --color-growth-green-light: #E8F5ED;
+  --color-attention-amber: #E6A23C;
+  --color-attention-amber-light: #FDF4E3;
+  --color-concern-red: #C0392B;
+  --color-concern-red-light: #FCEAE8;
+  --color-calm-blue: #5B8DBE;
+  --color-calm-blue-light: #EBF3FA;
+  
+  /* === TEXT === */
+  --color-text-primary: #1A2B3C;
+  --color-text-secondary: #4A5568;
+  --color-text-tertiary: #718096;
+  --color-text-inverse: #FFFFFF;
+  
+  /* === SHADOWS (Navy-tinted) === */
+  --shadow-sm: 0 1px 3px rgba(30, 58, 95, 0.08);
+  --shadow-md: 0 4px 12px rgba(30, 58, 95, 0.10);
+  --shadow-lg: 0 8px 24px rgba(30, 58, 95, 0.12);
+  --shadow-xl: 0 16px 48px rgba(30, 58, 95, 0.15);
+  
+  /* === SPACING === */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  
+  /* === RADIUS === */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+  
+  /* === TRANSITIONS === */
+  --transition-fast: 150ms ease-out;
+  --transition-normal: 200ms ease-out;
+  --transition-smooth: 250ms ease-out;
+  --transition-slow: 400ms ease-out;
+}
+
+/* === BASE STYLES === */
+body {
+  background-color: var(--color-morning-warmth);
+  color: var(--color-text-primary);
+  font-family: var(--font-body), system-ui, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display), system-ui, sans-serif;
+}
+
+/* === CUSTOM UTILITIES === */
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), system-ui, sans-serif;
+  }
+  
+  .font-body {
+    font-family: var(--font-body), system-ui, sans-serif;
+  }
+  
+  .bg-morning-warmth {
+    background-color: var(--color-morning-warmth);
+  }
+  
+  .bg-soft-linen {
+    background-color: var(--color-soft-linen);
+  }
+  
+  .bg-warm-paper {
+    background-color: var(--color-warm-paper);
+  }
+  
+  .bg-brothers-navy {
+    background-color: var(--color-brothers-navy);
+  }
+  
+  .bg-advocate-amber {
+    background-color: var(--color-advocate-amber);
+  }
+  
+  .bg-growth-green {
+    background-color: var(--color-growth-green);
+  }
+  
+  .bg-growth-green-light {
+    background-color: var(--color-growth-green-light);
+  }
+  
+  .bg-attention-amber-light {
+    background-color: var(--color-attention-amber-light);
+  }
+  
+  .bg-concern-red-light {
+    background-color: var(--color-concern-red-light);
+  }
+  
+  .text-brothers-navy {
+    color: var(--color-brothers-navy);
+  }
+  
+  .text-steady-slate {
+    color: var(--color-steady-slate);
+  }
+  
+  .text-advocate-amber {
+    color: var(--color-advocate-amber);
+  }
+  
+  .text-growth-green {
+    color: var(--color-growth-green);
+  }
+  
+  .text-attention-amber {
+    color: var(--color-attention-amber);
+  }
+  
+  .text-concern-red {
+    color: var(--color-concern-red);
+  }
+  
+  .shadow-card {
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .shadow-card-hover {
+    box-shadow: var(--shadow-md);
+  }
+  
+  .shadow-dropdown {
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .shadow-modal {
+    box-shadow: var(--shadow-xl);
+  }
+  
+  .transition-fast {
+    transition: all var(--transition-fast);
+  }
+  
+  .transition-normal {
+    transition: all var(--transition-normal);
+  }
+  
+  .transition-smooth {
+    transition: all var(--transition-smooth);
+  }
+}
+
+/* === SCROLLBAR STYLING === */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-soft-linen);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-steady-slate);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brothers-navy);
+}
+
+/* === FOCUS STATES (Accessibility) === */
+*:focus-visible {
+  outline: 2px solid var(--color-brothers-navy);
+  outline-offset: 2px;
+}
+
+/* === SELECTION === */
+::selection {
+  background-color: var(--color-advocate-amber-light);
+  color: var(--color-brothers-navy);
+}

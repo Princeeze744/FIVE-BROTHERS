@@ -1,0 +1,126 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============== ENUMS ==============
+
+enum Role {
+  ADMIN
+  STAFF
+}
+
+enum ReviewStatus {
+  NONE
+  LEFT_REVIEW
+}
+
+enum ReviewPlatform {
+  GOOGLE
+  YELP
+  FACEBOOK
+  OTHER
+}
+
+enum MessageDirection {
+  INBOUND
+  OUTBOUND
+}
+
+enum FollowUpStatus {
+  PENDING
+  COMPLETED
+  SKIPPED
+}
+
+// ============== MODELS ==============
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String
+  role          Role      @default(STAFF)
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  customers     Customer[]
+  messages      Message[]
+  followUps     FollowUp[]
+}
+
+model Customer {
+  id              String         @id @default(cuid())
+  firstName       String
+  lastName        String
+  phone           String
+  email           String?
+  address         String
+  city            String
+  purchaseDate    DateTime
+  deliveryDate    DateTime
+  product         String
+  specialNote     String?
+  
+  reviewStatus    ReviewStatus   @default(NONE)
+  reviewPlatform  ReviewPlatform?
+  
+  followUpStage   Int            @default(0)
+  nextFollowUpDate DateTime?
+  
+  isArchived      Boolean        @default(false)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  assignedTo      User?          @relation(fields: [assignedToId], references: [id])
+  assignedToId    String?
+
+  messages        Message[]
+  followUps       FollowUp[]
+}
+
+model Message {
+  id          String           @id @default(cuid())
+  body        String
+  direction   MessageDirection
+  twilioSid   String?
+  sentAt      DateTime         @default(now())
+
+  customer    Customer         @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  customerId  String
+
+  sentBy      User?            @relation(fields: [sentById], references: [id])
+  sentById    String?
+}
+
+model FollowUp {
+  id            String         @id @default(cuid())
+  stage         Int
+  status        FollowUpStatus @default(PENDING)
+  dueDate       DateTime
+  completedAt   DateTime?
+  feedback      String?
+
+  customer      Customer       @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  customerId    String
+
+  completedBy   User?          @relation(fields: [completedById], references: [id])
+  completedById String?
+
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model Template {
+  id        String   @id @default(cuid())
+  name      String
+  body      String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
