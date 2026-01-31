@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
     })
 
     // Filter out messages from archived customers
-    const activeMessages = messages.filter(m => !m.customer.isArchived)
+    const activeMessages = messages.filter((m: any) => !m.customer.isArchived)
 
     return NextResponse.json({ messages: activeMessages })
   } catch (error) {
